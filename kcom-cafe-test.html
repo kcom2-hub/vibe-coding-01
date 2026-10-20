@@ -1,0 +1,247 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>케이컴 카페</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+/* 레이아웃: 가운데 세로형 키오스크 패널 1개, 화면 3장(장소 → 주문 → 완료)을 전환 */
+:root{
+  --bg:#EEF6DC; --panel:#FFFFFF; --ink:#3E2A1E; --muted:#7D6656;
+  --line:#D9E9B8; --soft:#F6FBEA; --accent:#9CD14A; --accent-ink:#2E1F15; --mint:#6BAF2A;
+  --bean:#7A4B2E; --bean-dark:#4E2F1C; --cheek:#F4A6A0;
+  --display:"Jua","Gowun Dodum",system-ui,sans-serif;
+  --body:"Gowun Dodum",system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1A1510; --panel:#251D16; --ink:#F3EBDD; --muted:#C2B19E; --line:#3D3226; --soft:#2E251C; --accent:#A8DB5A; --accent-ink:#1E150E; --mint:#8CCB4A; --bean:#A06A44; --bean-dark:#2A1A10; --cheek:#E88F88; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1A1510; --panel:#251D16; --ink:#F3EBDD; --muted:#C2B19E; --line:#3D3226; --soft:#2E251C; --accent:#A8DB5A; --accent-ink:#1E150E; --mint:#8CCB4A; --bean:#A06A44; --bean-dark:#2A1A10; --cheek:#E88F88; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;padding-block:24px;padding-inline:16px}
+.kiosk{max-width:460px;margin:0 auto;background:var(--panel);border:2px solid var(--ink);border-radius:28px;overflow:hidden}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:18px 22px;border-bottom:2px dashed var(--line)}
+.brand{font-family:var(--display);font-size:24px;display:flex;align-items:center;gap:8px}
+.top{background:var(--accent);color:var(--accent-ink);border-bottom:3px solid var(--ink)}
+.top .chip{background:var(--panel);color:var(--ink);border-color:var(--ink)}
+.bean-sm{width:34px;height:34px}
+.hello{display:flex;align-items:center;gap:14px}
+.bean-lg{width:84px;height:84px;flex:none}
+.bubble{background:var(--soft);border:2px solid var(--line);border-radius:18px 18px 18px 4px;padding:10px 14px}
+@media (prefers-reduced-motion:no-preference){.bean-lg{animation:bob 2.4s ease-in-out infinite}}
+@keyframes bob{50%{transform:translateY(-5px) rotate(-4deg)}}
+.chip{font-size:14px;padding:4px 12px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--muted)}
+.screen{padding:22px;display:flex;flex-direction:column;gap:18px}
+h2{font-family:var(--display);font-weight:400;font-size:26px;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+.places{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.place{display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px 10px;border:2px solid var(--line);border-radius:20px;background:var(--soft);color:var(--ink);font:inherit;font-family:var(--display);font-size:21px;cursor:pointer}
+.place:hover,.place:focus-visible{border-color:var(--accent);outline:none}
+.place svg{width:54px;height:54px}
+.label{font-size:14px;letter-spacing:.06em;color:var(--muted);margin:0}
+.menus{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.menu{display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 6px;border:2px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);font:inherit;cursor:pointer}
+.menu svg{width:40px;height:40px}
+.menu b{font-weight:400;font-family:var(--display);font-size:17px}
+.menu span{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.menu[aria-pressed="true"]{border-color:var(--accent);background:var(--soft)}
+.qtyrow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.stepper{display:flex;align-items:center;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.stepper button{width:42px;height:40px;border:0;background:var(--soft);color:var(--ink);font-size:20px;cursor:pointer}
+.stepper output{min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
+.btn{border:0;border-radius:14px;padding:12px 18px;font:inherit;font-family:var(--display);font-size:18px;cursor:pointer}
+.btn-line{background:transparent;border:2px solid var(--ink);color:var(--ink)}
+.btn-main{background:var(--accent);color:var(--accent-ink);width:100%;padding:16px;font-size:20px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn:focus-visible,.menu:focus-visible,.stepper button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.receipt{border:2px dashed var(--line);border-radius:16px;padding:14px 16px;background:var(--soft)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-weight:400;font-size:14px;color:var(--muted);text-align:left;padding:4px 0}
+td{padding:6px 0;border-top:1px solid var(--line)}
+th:not(:first-child),td:not(:first-child){text-align:right}
+.empty{color:var(--muted);text-align:center;padding:10px 0;margin:0}
+.total{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--display);font-size:20px;padding-top:4px}
+.total strong{font-weight:400;font-size:28px;color:var(--bean);font-variant-numeric:tabular-nums}
+.done{text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.check{width:64px;height:64px;border-radius:50%;background:var(--mint);display:grid;place-items:center}
+.check svg{width:34px;height:34px}
+@media (max-width:380px){.menus{gap:6px}.menu b{font-size:15px}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="bean" viewBox="0 0 100 100">
+    <path d="M50 16c2-8 8-12 16-11-1 8-7 12-16 11z" fill="var(--mint)"/>
+    <path d="M50 18c-2-6-7-9-13-8 1 6 6 9 13 8z" fill="var(--accent)"/>
+    <ellipse cx="50" cy="56" rx="32" ry="38" fill="var(--bean)" stroke="var(--bean-dark)" stroke-width="3"/>
+    <path d="M50 20c-9 12 9 24 0 36s9 24 0 36" fill="none" stroke="var(--bean-dark)" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+    <ellipse cx="38" cy="38" rx="7" ry="10" fill="#fff" opacity=".18"/>
+    <circle cx="37" cy="54" r="4.5" fill="var(--bean-dark)"/><circle cx="38.5" cy="52.5" r="1.4" fill="#fff"/>
+    <circle cx="63" cy="54" r="4.5" fill="var(--bean-dark)"/><circle cx="64.5" cy="52.5" r="1.4" fill="#fff"/>
+    <ellipse cx="29" cy="64" rx="5" ry="3" fill="var(--cheek)"/><ellipse cx="71" cy="64" rx="5" ry="3" fill="var(--cheek)"/>
+    <path d="M44 64q6 6 12 0" fill="none" stroke="var(--bean-dark)" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<div class="kiosk">
+  <div class="top">
+    <div class="brand"><svg class="bean-sm" aria-hidden="true"><use href="#bean"/></svg>케이컴 카페</div>
+    <span class="chip" id="placeChip" hidden></span>
+  </div>
+
+  <!-- 화면 1: 장소 선택 -->
+  <section class="screen" id="s1">
+    <div class="hello">
+      <svg class="bean-lg" aria-hidden="true"><use href="#bean"/></svg>
+      <div class="bubble">
+        <p class="sub">안녕하세요, 콩이에요!</p>
+        <h2>어디에서 드시나요?</h2>
+      </div>
+    </div>
+    <div class="places">
+      <button class="place" id="takeout" data-place="포장하기">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M14 22h36l-4 34H18z" fill="var(--accent)" fill-opacity=".25"/><path d="M24 22v-6a8 8 0 0 1 16 0v6"/></svg>
+        포장하기
+      </button>
+      <button class="place" id="dinein" data-place="매장에서">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M12 26h32v12a12 12 0 0 1-12 12h-8a12 12 0 0 1-12-12z" fill="var(--mint)" fill-opacity=".3"/><path d="M44 30h4a6 6 0 0 1 0 12h-5M8 56h44M22 12c-2 4 2 6 0 10M32 12c-2 4 2 6 0 10"/></svg>
+        매장에서
+      </button>
+    </div>
+  </section>
+
+  <!-- 화면 2: 주문 -->
+  <section class="screen" id="s2" hidden>
+    <p class="label">메뉴를 고르세요</p>
+    <div class="menus" id="menus"></div>
+    <div class="qtyrow">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span>수량</span>
+        <div class="stepper">
+          <button id="minus" aria-label="수량 줄이기">−</button>
+          <output id="qty">1</output>
+          <button id="plus" aria-label="수량 늘리기">+</button>
+        </div>
+      </div>
+      <button class="btn btn-line" id="addBtn" disabled>주문 담기</button>
+    </div>
+    <div class="receipt">
+      <p class="label">주문 내역</p>
+      <table>
+        <thead><tr><th>메뉴</th><th>수량</th><th>금액</th></tr></thead>
+        <tbody id="list"></tbody>
+      </table>
+      <p class="empty" id="empty">아직 담은 메뉴가 없어요</p>
+      <div class="total"><span>총 주문 금액</span><strong id="total">0원</strong></div>
+    </div>
+    <button class="btn btn-main" id="payBtn" disabled>계산하기</button>
+  </section>
+
+  <!-- 화면 3: 완료 -->
+  <section class="screen" id="s3" hidden>
+    <div class="done">
+      <svg class="bean-lg" aria-hidden="true"><use href="#bean"/></svg>
+      <h2>주문이 완료되었어요</h2>
+      <p class="sub" id="doneMsg">음료가 준비되면 번호로 불러 드릴게요.</p>
+    </div>
+    <div class="receipt">
+      <p class="label">주문 내역</p>
+      <table>
+        <thead><tr><th>메뉴</th><th>수량</th><th>금액</th></tr></thead>
+        <tbody id="finalList"></tbody>
+      </table>
+      <div class="total"><span>총 주문 금액</span><strong id="finalTotal">0원</strong></div>
+    </div>
+    <button class="btn btn-line" id="homeBtn" style="width:100%">처음으로</button>
+  </section>
+</div>
+
+<script>
+// 메뉴와 가격
+const MENU = [
+  { name: "카페라떼",   price: 3000, color: "#C89B6D" },
+  { name: "아메리카노", price: 2500, color: "#5B3A26" },
+  { name: "바닐라라떼", price: 3300, color: "#F3D89A" }
+];
+
+let place = "";       // 포장하기 / 매장에서
+let selected = null;  // 선택한 메뉴
+let qty = 1;          // 수량
+let orderList = [];   // 주문 내역
+let total = 0;        // 총 주문 금액
+
+const $ = id => document.getElementById(id);
+const won = n => n.toLocaleString("ko-KR") + "원";
+
+function show(n) {
+  ["s1","s2","s3"].forEach((id, i) => $(id).hidden = (i + 1 !== n));
+}
+
+// 메뉴 버튼 만들기
+MENU.forEach((m, i) => {
+  const b = document.createElement("button");
+  b.className = "menu";
+  b.setAttribute("aria-pressed", "false");
+  b.innerHTML = `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+      <path d="M9 14h22l-3 20H12z" fill="${m.color}"/><path d="M7 10h26v4H7z"/></svg>
+    <b>${m.name}</b><span>${won(m.price)}</span>`;
+  b.onclick = () => {
+    selected = m;
+    document.querySelectorAll(".menu").forEach(x => x.setAttribute("aria-pressed", x === b));
+    $("addBtn").disabled = false;
+  };
+  $("menus").appendChild(b);
+});
+
+// [입력] 포장하기 / 매장에서
+document.querySelectorAll(".place").forEach(b => b.onclick = () => {
+  place = b.dataset.place;
+  $("placeChip").textContent = place;
+  $("placeChip").hidden = false;
+  show(2);
+});
+
+// 수량 입력
+$("minus").onclick = () => { if (qty > 1) qty--; $("qty").textContent = qty; };
+$("plus").onclick  = () => { if (qty < 20) qty++; $("qty").textContent = qty; };
+
+// 주문 내역 저장 + 총 주문 금액 = 총 주문 금액 + (수량 × 가격)
+$("addBtn").onclick = () => {
+  const found = orderList.find(o => o.name === selected.name);
+  if (found) found.qty += qty;
+  else orderList.push({ name: selected.name, price: selected.price, qty });
+  total = total + selected.price * qty;
+  qty = 1; $("qty").textContent = 1;
+  render();
+};
+
+function rows(target) {
+  $(target).innerHTML = orderList.map(o =>
+    `<tr><td>${o.name}</td><td>${o.qty}잔</td><td>${won(o.price * o.qty)}</td></tr>`).join("");
+}
+
+function render() {
+  rows("list");
+  $("empty").hidden = orderList.length > 0;
+  $("total").textContent = won(total);
+  $("payBtn").disabled = orderList.length === 0;
+}
+
+// [출력] 계산하기 → 주문 내역, 총 주문 금액
+$("payBtn").onclick = () => {
+  rows("finalList");
+  $("finalTotal").textContent = won(total);
+  $("doneMsg").textContent = place === "포장하기"
+    ? "포장해서 드릴게요. 번호를 부르면 받아 가세요."
+    : "자리에서 잠시 기다려 주세요. 번호로 불러 드릴게요.";
+  show(3);
+};
+
+// 처음으로
+$("homeBtn").onclick = () => {
+  place = ""; selected = null; qty = 1; orderList = []; total = 0;
+  $("qty").textContent = 1; $("addBtn").disabled = true;
+  $("placeChip").hidden = true;
+  document.querySelectorAll(".menu").forEach(x => x.setAttribute("aria-pressed", "false"));
+  render(); show(1);
+};
+
+render();
+</script>
+
+</body></html>
