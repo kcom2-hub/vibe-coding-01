@@ -1,0 +1,337 @@
+<title>케이컴퓨터코딩학원</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="이천 송정점·갈산점 케이컴퓨터코딩학원 — 코딩, 자격증, 빅데이터, 바이브코딩, AI 에이전트">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: 남색 히어로(AI 신경망 그래픽) → 간결한 소개 → 과목 4묶음 → AI 3과정 카드 → 지점 2열 연락처 */
+:root{
+  --bg:#F4F8FC; --surface:#FFFFFF; --ink:#13224F; --muted:#5A6788; --line:#DCE5F1;
+  --navy:#13235B; --navy-2:#1C3277; --sky:#4FB3EE; --sky-soft:#E3F2FC; --on-navy:#EAF4FD;
+  --f-display:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --max:1120px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1230; --surface:#111C44; --ink:#E6EEFB; --muted:#9EAED0; --line:#223165;
+  --navy:#0D1846; --navy-2:#16245C; --sky:#6CC6FA; --sky-soft:#16305E; --on-navy:#EAF4FD; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1230; --surface:#111C44; --ink:#E6EEFB; --muted:#9EAED0; --line:#223165;
+  --navy:#0D1846; --navy-2:#16245C; --sky:#6CC6FA; --sky-soft:#16305E; --on-navy:#EAF4FD; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;word-break:keep-all}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--navy)}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.3;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:6px}
+.label{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.08em;color:var(--sky);font-weight:500}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--navy);color:var(--on-navy)}
+.bar{display:flex;align-items:center;gap:20px;min-height:62px;flex-wrap:wrap;padding-block:8px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 17px var(--f-display)}
+.logo b{font-family:var(--f-mono);background:var(--sky);color:var(--navy);border-radius:8px;padding:2px 8px;font-size:14px}
+nav{display:flex;gap:2px;margin-left:auto}
+nav a{text-decoration:none;font-size:15px;opacity:.78;padding:6px 10px;border-radius:8px}
+nav a:hover{opacity:1;background:rgba(255,255,255,.08)}
+.seg{display:inline-flex;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:3px}
+.seg button{font:500 14px var(--f-body);border:0;background:transparent;color:var(--on-navy);opacity:.75;padding:5px 13px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sky);color:var(--navy);opacity:1}
+@media (max-width:820px){nav{display:none}.bar{justify-content:space-between}}
+
+/* hero */
+.hero{background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);color:var(--on-navy);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;padding-block:64px 72px}
+.hero .wrap>*{min-width:0}
+.hero h1{font-size:clamp(34px,5.2vw,56px);font-weight:700;color:#fff}
+.hero h1 span{color:var(--sky)}
+.hero p{margin-top:18px;font-size:17.5px;opacity:.82;max-width:30em}
+.chip{display:inline-block;margin-bottom:20px;font-size:13.5px;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 14px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;font:600 15px var(--f-body);text-decoration:none;border-radius:10px;padding:12px 20px;border:1px solid var(--sky);cursor:pointer}
+.btn.fill{background:var(--sky);color:var(--navy)}
+.btn.line{color:var(--on-navy);border-color:rgba(255,255,255,.35)}
+.viz{position:relative;aspect-ratio:1/0.82;max-width:100%}
+.viz canvas{width:100%;height:100%;display:block}
+.viz .tag{position:absolute;font:500 12px var(--f-mono);color:var(--on-navy);background:rgba(13,24,70,.75);border:1px solid rgba(108,198,250,.4);border-radius:6px;padding:3px 8px}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-block:44px 52px}.viz{aspect-ratio:1/0.6}}
+
+/* sections */
+section.s{padding-block:80px}
+.head{margin-bottom:36px;max-width:640px}
+.head h2{font-size:clamp(26px,3.4vw,36px);margin-top:6px}
+.head p{color:var(--muted);margin-top:10px}
+
+.about{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.about div{border-top:2px solid var(--sky);padding-top:18px}
+.about h3{font-size:18px;margin-bottom:6px}
+.about p{color:var(--muted);font-size:15px}
+.path{margin-top:44px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14.5px}
+.path span{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 12px}
+.path span.ai{background:var(--sky-soft);border-color:transparent;color:var(--ink);font-weight:500}
+.path i{font-style:normal;color:var(--sky)}
+@media (max-width:820px){.about{grid-template-columns:1fr;gap:20px}}
+
+.courses{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.course{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;min-width:0}
+.course h3{font-size:18px;margin-bottom:12px}
+.course ul{list-style:none;padding:0;margin:0;display:grid;gap:9px;font-size:15px}
+.course li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding-bottom:8px}
+.course li:last-child{border-bottom:0;padding-bottom:0}
+.course small{color:var(--muted);font-size:12.5px;white-space:nowrap}
+@media (max-width:980px){.courses{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.courses{grid-template-columns:1fr}}
+
+/* AI */
+.ai-s{background:var(--surface);border-block:1px solid var(--line)}
+.ai{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column;min-width:0}
+.art{background:var(--navy);height:150px;display:grid;place-items:center}
+.art svg{width:170px;height:120px}
+.card .body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card h3{font-size:20px}
+.card .en{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.card p{font-size:15px;color:var(--muted)}
+.card dl{margin:auto 0 0;display:grid;grid-template-columns:56px 1fr;gap:6px 10px;font-size:14px;border-top:1px solid var(--line);padding-top:14px}
+.card dt{color:var(--sky);font-weight:500}
+.card dd{margin:0}
+@media (max-width:900px){.ai{grid-template-columns:1fr}}
+
+/* branches */
+.branches{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.branch{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s,opacity .2s}
+.branch.on{border-color:var(--sky);box-shadow:0 0 0 3px var(--sky-soft)}
+.branch.dim{opacity:.5}
+.branch h3{font-size:22px}
+.branch .focus{font-size:14px;color:var(--muted)}
+.tel{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--sky-soft);border-radius:12px;padding:14px 16px}
+.tel a{font:700 22px var(--f-display);text-decoration:none;font-variant-numeric:tabular-nums;color:var(--ink)}
+.tel button{margin-left:auto;font:500 13px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:5px 12px;cursor:pointer}
+.branch .addr{font-size:15px}
+.branch .news{font-size:14px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px}
+.branch .news b{color:var(--sky);font-weight:500;margin-right:6px}
+.branch .map{font-size:14px;margin-top:auto}
+@media (max-width:780px){.branches{grid-template-columns:1fr}}
+
+footer{padding-block:32px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:var(--on-navy);padding:9px 18px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:70}
+.toast.show{opacity:1}
+</style>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top"><b>&lt;K/&gt;</b>케이컴퓨터코딩학원</a>
+    <nav aria-label="주요 메뉴"><a href="#about">학원소개</a><a href="#courses">과목</a><a href="#ai">AI 과정</a><a href="#branches">지점·상담</a></nav>
+    <div class="seg" role="group" aria-label="지점 선택">
+      <button type="button" data-b="all" aria-pressed="true">전체</button>
+      <button type="button" data-b="songjeong" aria-pressed="false">송정점</button>
+      <button type="button" data-b="galsan" aria-pressed="false">갈산점</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="chip" id="heroChip">이천 송정점 · 갈산점</span>
+        <h1>코딩을 배우고,<br><span>AI와 함께</span> 만듭니다</h1>
+        <p>초·중·고 컴퓨터, 코딩, 자격증부터 빅데이터 분석, 바이브코딩, AI 에이전트까지. 직접 만들어 보는 체험식 수업입니다.</p>
+        <div class="cta"><a class="btn fill" href="#branches">상담 전화하기</a><a class="btn line" href="#ai">AI 과정 보기</a></div>
+      </div>
+      <div class="viz" aria-hidden="true">
+        <canvas id="net"></canvas>
+        <span class="tag" style="left:4%;top:14%">input: data</span>
+        <span class="tag" style="right:4%;top:46%">output: AI</span>
+        <span class="tag" style="left:30%;bottom:8%">pandas · prompt · agent</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="about">
+    <div class="wrap">
+      <div class="head"><span class="label">ABOUT</span><h2>컴퓨터를 쓰는 아이에서 만드는 아이로</h2>
+        <p>송정점과 갈산점이 같은 커리큘럼으로 운영합니다. 학생의 현재 수준을 확인하고 다음 단계를 함께 정합니다.</p></div>
+      <div class="about">
+        <div><h3>체험식 수업</h3><p>설명은 짧게, 실습은 길게. 과정마다 학생이 만든 결과물로 마무리합니다.</p></div>
+        <div><h3>자격증으로 증명</h3><p>ITQ, DIAT, 코딩활용능력, 컴퓨터활용능력, AI 코딩 자격증. KT AICE와 협약해 AI 자격까지 준비합니다.</p></div>
+        <div><h3>지금 필요한 AI</h3><p>AI융합교육을 전공 중인 원장이 빅데이터·바이브코딩·에이전트 과정을 직접 설계합니다.</p></div>
+      </div>
+      <div class="path" aria-label="학습 순서">
+        <span>블록·로봇코딩</span><i>→</i><span>교구코딩</span><i>→</i><span>인공지능 기초</span><i>→</i><span>자격증</span><i>→</i><span>알고리즘</span><i>→</i><span>Python · C</span><i>→</i><span class="ai">빅데이터</span><i>→</i><span class="ai">바이브코딩</span><i>→</i><span class="ai">AI 에이전트</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="courses" style="padding-top:0">
+    <div class="wrap">
+      <div class="head"><span class="label">COURSES</span><h2>과목 안내</h2></div>
+      <div class="courses">
+        <div class="course"><h3>코딩</h3><ul>
+          <li>블록코딩 <small>엔트리·스크래치</small></li><li>로봇코딩 <small>햄스터봇·레고</small></li><li>교구코딩 <small>micro:bit·AI키트</small></li><li>인공지능 기초 <small>엔트리AI·티처블머신</small></li><li>알고리즘 <small>초·중</small></li><li>텍스트코딩 <small>Python·C</small></li><li>웹 <small>HTML·CSS·JavaScript</small></li></ul></div>
+        <div class="course"><h3>컴퓨터 활용</h3><ul>
+          <li>컴퓨터 기초 <small>윈도우·인터넷</small></li><li>타자 연습 <small>한글·영문 타수</small></li><li>한글 문서 <small>보고서·표 만들기</small></li><li>파워포인트 <small>발표 자료</small></li><li>엑셀 <small>표·함수·차트</small></li><li>구글 오피스 <small>문서·시트</small></li></ul></div>
+        <div class="course"><h3>자격증</h3><ul>
+          <li>ITQ <small>한글·PPT·엑셀</small></li><li>DIAT <small>디지털정보활용</small></li><li>코딩활용능력 <small>1·2·3급</small></li><li>컴퓨터활용능력 <small>엑셀·DB</small></li><li>AI 코딩 자격증 <small>초·중</small></li><li>AICE <small>KT 협약</small></li></ul></div>
+        <div class="course"><h3>영상 크리에이터</h3><ul>
+          <li>캔바 <small>썸네일·카드뉴스</small></li><li>브루 <small>AI 자막·더빙</small></li><li>캡컷 <small>컷 편집·효과</small></li><li>AI 이미지 만들기 <small>프롬프트 디자인</small></li><li>영상 기획 <small>스토리보드·대본</small></li><li>유튜브 쇼츠 업로드 <small>중·고</small></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s ai-s" id="ai">
+    <div class="wrap">
+      <div class="head"><span class="label">AI COURSES</span><h2>요즘 수업하고 있는 AI 과정</h2>
+        <p>코딩 기초를 마친 중·고등학생을 위한 심화 과정입니다.</p></div>
+      <div class="ai">
+        <article class="card">
+          <div class="art"><svg viewBox="0 0 170 120" fill="none" stroke-linecap="round">
+            <ellipse cx="38" cy="26" rx="24" ry="8" stroke="#6CC6FA" stroke-width="2"/>
+            <path d="M14 26v52c0 4.4 10.7 8 24 8s24-3.6 24-8V26" stroke="#6CC6FA" stroke-width="2"/>
+            <path d="M14 52c0 4.4 10.7 8 24 8s24-3.6 24-8" stroke="#6CC6FA" stroke-width="2" opacity=".6"/>
+            <path d="M80 100h80" stroke="#EAF4FD" stroke-width="2" opacity=".5"/>
+            <rect x="88" y="66" width="12" height="34" rx="2" fill="#6CC6FA" opacity=".55"/>
+            <rect x="108" y="48" width="12" height="52" rx="2" fill="#6CC6FA" opacity=".75"/>
+            <rect x="128" y="30" width="12" height="70" rx="2" fill="#6CC6FA"/>
+            <rect x="148" y="56" width="12" height="44" rx="2" fill="#6CC6FA" opacity=".65"/>
+            <path d="M66 56h14" stroke="#EAF4FD" stroke-width="2" stroke-dasharray="3 4"/></svg></div>
+          <div class="body">
+            <div><h3>빅데이터 분석</h3><div class="en">pandas · Google Colab</div></div>
+            <p>공공데이터와 설문 데이터를 판다스로 정리하고 분석해, 그래프와 보고서로 결론을 냅니다. AI가 배우는 재료인 데이터를 다루는 첫걸음입니다.</p>
+            <dl><dt>대상</dt><dd>파이썬 기초를 마친 중·고등학생</dd><dt>결과물</dt><dd>데이터 분석 보고서와 발표</dd><dt>운영</dt><dd>송정점 토요 프로젝트반</dd></dl>
+          </div>
+        </article>
+        <article class="card">
+          <div class="art"><svg viewBox="0 0 170 120" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h72a8 8 0 0 1 8 8v24a8 8 0 0 1-8 8H38l-14 12V60H12" stroke="#EAF4FD" stroke-width="2" opacity=".85"/>
+            <path d="M26 34h44M26 46h30" stroke="#EAF4FD" stroke-width="2" opacity=".5"/>
+            <rect x="78" y="50" width="82" height="58" rx="8" stroke="#6CC6FA" stroke-width="2"/>
+            <path d="M104 70l-10 9 10 9M134 70l10 9-10 9M124 66l-10 26" stroke="#6CC6FA" stroke-width="2.4"/>
+            <circle cx="150" cy="22" r="4" fill="#6CC6FA"/><circle cx="136" cy="14" r="2.5" fill="#6CC6FA" opacity=".6"/></svg></div>
+          <div class="body">
+            <div><h3>바이브코딩</h3><div class="en">Vibe Coding · Replit</div></div>
+            <p>만들고 싶은 기능을 말로 설명하면 AI가 코드를 함께 작성합니다. 학생은 기획하고, 실행해 보고, 고칠 점을 다시 지시하며 결과를 판단하는 힘을 기릅니다.</p>
+            <dl><dt>대상</dt><dd>중·고등학생</dd><dt>결과물</dt><dd>자기소개 웹페이지, 퀴즈 게임</dd><dt>운영</dt><dd>12차시, 두 지점 모두</dd></dl>
+          </div>
+        </article>
+        <article class="card">
+          <div class="art"><svg viewBox="0 0 170 120" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="85" cy="60" r="38" stroke="#6CC6FA" stroke-width="2" stroke-dasharray="6 6" opacity=".7"/>
+            <path d="M118 42l4-10 6 9" stroke="#6CC6FA" stroke-width="2"/>
+            <rect x="66" y="44" width="38" height="32" rx="9" stroke="#EAF4FD" stroke-width="2"/>
+            <circle cx="78" cy="59" r="3.5" fill="#6CC6FA"/><circle cx="92" cy="59" r="3.5" fill="#6CC6FA"/>
+            <path d="M85 44v-8"stroke="#EAF4FD" stroke-width="2"/><circle cx="85" cy="33" r="3" fill="#EAF4FD"/>
+            <rect x="14" y="20" width="22" height="16" rx="4" stroke="#EAF4FD" stroke-width="1.6" opacity=".7"/>
+            <rect x="134" y="84" width="22" height="16" rx="4" stroke="#EAF4FD" stroke-width="1.6" opacity=".7"/>
+            <rect x="12" y="86" width="22" height="16" rx="4" stroke="#EAF4FD" stroke-width="1.6" opacity=".7"/></svg></div>
+          <div class="body">
+            <div><h3>AI 에이전트</h3><div class="en">AI Agent</div></div>
+            <p>목표를 주면 스스로 계획하고 검색·계산·파일 같은 도구를 써서 일을 끝내는 AI를 설계합니다. 결과를 확인하고 다시 시도하는 과정까지 배웁니다.</p>
+            <dl><dt>대상</dt><dd>바이브코딩·파이썬 수료생</dd><dt>결과물</dt><dd>공부 계획을 짜 주는 학습 도우미 에이전트</dd><dt>운영</dt><dd>두 지점 모두</dd></dl>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="branches">
+    <div class="wrap">
+      <div class="head"><span class="label">BRANCHES</span><h2>지점 안내 · 상담</h2>
+        <p>가까운 지점으로 전화 주시면 학생 수준에 맞는 시작 단계를 안내해 드립니다.</p></div>
+      <div class="branches" id="branchCards"></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>케이컴퓨터코딩학원 · 이천 송정점 0507-1464-9120 · 갈산점 0507-1351-9128</span><span>© 2026</span></div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ===== 지점 정보: 이곳만 수정하면 두 지점에 모두 반영됩니다 ===== */
+const BRANCHES = {
+  songjeong: {
+    name:"송정점", phone:"0507-1464-9120",
+    address:"경기 이천시 증신로291번길 138 (송정동)",
+    focus:"코딩 · 자격증 · 고등 파이썬/빅데이터",
+    news:"빅데이터 분석 프로젝트반 모집",
+    map:"https://map.naver.com/p/search/케이컴퓨터코딩학원 송정"
+  },
+  galsan: {
+    name:"갈산점", phone:"0507-1351-9128",
+    address:"경기 이천시 안흥로 43, 2층 (갈산동)",
+    focus:"초등 코딩 · ITQ · 코딩활용능력",
+    news:"초등 AI 코딩 자격증반 모집",
+    map:"https://map.naver.com/p/search/케이컴퓨터코딩학원 갈산점"
+  }
+};
+
+let current="all";
+try{ const s=localStorage.getItem("kcom-branch"); if(s==="all"||BRANCHES[s]) current=s; }catch(e){}
+const $=s=>document.querySelector(s);
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),1600);}
+function copy(text){
+  const ok=()=>toast(text+" 복사했습니다");
+  const fb=()=>{const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok();}catch(e){toast("번호를 길게 눌러 복사해 주세요");}ta.remove();};
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok).catch(fb); else fb();
+}
+
+function render(){
+  document.querySelectorAll(".seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.b===current));
+  $("#heroChip").textContent = current==="all" ? "이천 송정점 · 갈산점" : "이천 "+BRANCHES[current].name+" · "+BRANCHES[current].phone;
+  $("#branchCards").innerHTML = Object.entries(BRANCHES).map(([k,b])=>`
+    <article class="branch ${current===k?"on":current==="all"?"":"dim"}">
+      <div><h3>${b.name}</h3><div class="focus">${b.focus}</div></div>
+      <div class="tel"><a href="tel:${b.phone.replace(/-/g,"")}">${b.phone}</a><button type="button" data-copy="${b.phone}">번호 복사</button></div>
+      <div class="addr">${b.address}</div>
+      <div class="news"><b>소식</b>${b.news}</div>
+      <a class="map" href="${encodeURI(b.map)}" target="_blank" rel="noopener">네이버 지도에서 보기 ↗</a>
+    </article>`).join("");
+}
+document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{
+  current=b.dataset.b; try{localStorage.setItem("kcom-branch",current);}catch(e){} render();
+}));
+document.addEventListener("click",e=>{const c=e.target.closest("[data-copy]"); if(c) copy(c.dataset.copy);});
+render();
+
+/* ===== 히어로 AI 신경망 그래픽 ===== */
+(function(){
+  const cv=$("#net"), ctx=cv.getContext("2d");
+  const layers=[4,6,6,3]; let nodes=[], W=0,H=0, t=0;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function size(){
+    const r=cv.getBoundingClientRect(), d=Math.min(devicePixelRatio||1,2);
+    W=r.width; H=r.height; cv.width=W*d; cv.height=H*d; ctx.setTransform(d,0,0,d,0,0);
+    nodes=layers.map((n,i)=>Array.from({length:n},(_,j)=>({x:W*(0.1+0.8*i/(layers.length-1)), y:H*((j+1)/(n+1))})));
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<nodes.length-1;i++) nodes[i].forEach((a,ai)=>nodes[i+1].forEach((b,bi)=>{
+      const w=0.5+0.5*Math.sin(t*0.02+ai*1.3+bi*0.7+i);
+      ctx.strokeStyle=`rgba(108,198,250,${0.08+w*0.32})`; ctx.lineWidth=0.6+w*1.1;
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+    }));
+    // 흐르는 신호
+    for(let i=0;i<nodes.length-1;i++) nodes[i].forEach((a,ai)=>{
+      const b=nodes[i+1][(ai*2+Math.floor(t/90))%nodes[i+1].length];
+      const p=((t*0.012)+ai*0.27+i*0.4)%1;
+      ctx.fillStyle="rgba(234,244,253,.9)";
+      ctx.beginPath(); ctx.arc(a.x+(b.x-a.x)*p,a.y+(b.y-a.y)*p,1.8,0,7); ctx.fill();
+    });
+    nodes.forEach((L,i)=>L.forEach((n,j)=>{
+      const g=0.5+0.5*Math.sin(t*0.03+i+j);
+      ctx.fillStyle=`rgba(108,198,250,${0.12+g*0.18})`; ctx.beginPath(); ctx.arc(n.x,n.y,13,0,7); ctx.fill();
+      ctx.fillStyle=i===nodes.length-1?"#EAF4FD":"#6CC6FA"; ctx.beginPath(); ctx.arc(n.x,n.y,6,0,7); ctx.fill();
+    }));
+    t++; if(!reduce) requestAnimationFrame(draw);
+  }
+  size(); addEventListener("resize",()=>{size(); if(reduce) draw();}); draw();
+})();
+</script>
